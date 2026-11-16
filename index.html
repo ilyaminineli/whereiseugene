@@ -4,182 +4,163 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#101010">
-  <meta name="description" content="A quiet memorial timer for Eugene.">
-  <title>where is eugene?</title>
+  <meta name="description" content="Still missing.">
+  <title>still missing</title>
   <style>
     :root {
       color-scheme: dark;
-      --bg: #101010;
-      --fg: #e9e7e1;
-      --muted: #85837d;
-      --line: #34332f;
-      --soft: #1a1a18;
-      --accent: #c5b6a3;
+      --background: #101010;
+      --foreground: #e8e6e1;
+      --muted: #77756f;
+      --rule: #292824;
     }
+
     * { box-sizing: border-box; }
-    html { min-height: 100%; background: var(--bg); }
+
+    html, body { min-height: 100%; }
+
     body {
       margin: 0;
       min-height: 100vh;
-      background:
-        radial-gradient(ellipse at 50% 42%, rgba(197,182,163,.055), transparent 54%),
-        var(--bg);
-      color: var(--fg);
+      background: var(--background);
+      color: var(--foreground);
       font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       -webkit-font-smoothing: antialiased;
     }
+
     main {
-      width: min(760px, calc(100% - 40px));
-      min-height: 100vh;
+      width: min(680px, calc(100% - 40px));
+      min-height: 100svh;
       margin: 0 auto;
-      padding: clamp(54px, 10vh, 104px) 0 34px;
+      padding: 0 0 28px;
       display: flex;
       flex-direction: column;
       align-items: center;
+      justify-content: center;
       text-align: center;
     }
-    .eyebrow {
+
+    .status {
+      margin-bottom: 42px;
       color: var(--muted);
       font-size: 11px;
-      letter-spacing: .24em;
-      text-transform: uppercase;
-    }
-    h1 {
-      margin: 29px 0 12px;
-      font-size: clamp(38px, 8vw, 68px);
-      line-height: 1;
       font-weight: 400;
+      letter-spacing: .22em;
+      text-transform: lowercase;
+    }
+
+    .timer {
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      align-items: start;
+      gap: 8px;
+    }
+
+    .unit { min-width: 0; }
+
+    .value {
+      display: block;
+      font-size: clamp(30px, 6.2vw, 52px);
+      line-height: 1.1;
+      font-weight: 300;
       letter-spacing: -.065em;
+      font-variant-numeric: tabular-nums;
     }
-    .subtitle {
-      max-width: 440px;
-      margin: 0;
-      color: #aaa79f;
-      font-size: 14px;
-      line-height: 1.8;
-      font-weight: 350;
-    }
-    .rule {
-      width: 46px;
-      height: 1px;
-      margin: 44px 0 27px;
-      background: var(--accent);
-      opacity: .65;
-    }
-    .elapsed-label {
-      margin-bottom: 12px;
+
+    .label {
+      display: block;
+      margin-top: 10px;
       color: var(--muted);
-      font-size: 10px;
-      letter-spacing: .2em;
+      font-size: 9px;
+      letter-spacing: .14em;
       text-transform: uppercase;
     }
-    .calendar {
+
+    .total {
+      width: 100%;
+      margin-top: 37px;
+      padding-top: 17px;
+      border-top: 1px solid var(--rule);
       display: flex;
       align-items: baseline;
       justify-content: center;
-      flex-wrap: wrap;
-      gap: 8px 18px;
-      margin: 0 0 30px;
-    }
-    .unit { display: flex; align-items: baseline; gap: 5px; }
-    .number {
-      font-variant-numeric: tabular-nums;
-      font-size: clamp(32px, 7vw, 54px);
-      line-height: 1.15;
-      font-weight: 300;
-      letter-spacing: -.055em;
-    }
-    .unit-name { color: var(--muted); font-size: 12px; }
-    .clock {
-      width: 100%;
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      border-top: 1px solid var(--line);
-      border-bottom: 1px solid var(--line);
-      padding: 21px 0 19px;
-    }
-    .clock-item + .clock-item { border-left: 1px solid var(--line); }
-    .clock-value {
-      display: block;
-      font-size: clamp(21px, 4.4vw, 31px);
-      font-weight: 350;
-      font-variant-numeric: tabular-nums;
-      letter-spacing: -.04em;
-    }
-    .clock-label {
-      display: block;
-      margin-top: 7px;
-      color: var(--muted);
-      font-size: 9px;
-      letter-spacing: .18em;
-      text-transform: uppercase;
-    }
-    .since {
-      margin-top: 27px;
+      gap: 8px;
       color: var(--muted);
       font-size: 11px;
-      line-height: 1.8;
-      letter-spacing: .04em;
+      letter-spacing: .08em;
     }
-    .message {
-      max-width: 460px;
-      margin: auto 0 0;
-      padding-top: 72px;
-      color: #c4c0b8;
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: clamp(17px, 3vw, 21px);
-      font-style: italic;
-      line-height: 1.65;
+
+    .total-value {
+      color: var(--foreground);
+      font-size: 15px;
+      font-weight: 400;
+      font-variant-numeric: tabular-nums;
+      letter-spacing: 0;
     }
+
     footer {
-      margin-top: 53px;
-      color: #5e5c57;
-      font-size: 9px;
-      letter-spacing: .17em;
-      text-transform: uppercase;
+      margin-top: auto;
+      padding-top: 64px;
+      color: #77756f;
+      font-size: 10px;
+      letter-spacing: .16em;
     }
-    @media (max-width: 460px) {
-      main { width: min(100% - 32px, 760px); padding-top: 64px; }
-      .calendar { gap: 5px 13px; }
-      .clock { padding: 17px 0 15px; }
-      .clock-label { letter-spacing: .1em; font-size: 8px; }
+
+    @media (max-width: 520px) {
+      main { width: min(100% - 36px, 420px); }
+      .status { margin-bottom: 34px; }
+      .timer { grid-template-columns: repeat(3, minmax(0, 1fr)); row-gap: 28px; }
+      .value { font-size: clamp(34px, 10vw, 48px); }
+      .unit:nth-child(4) { grid-column: 1 / 2; }
+      .unit:nth-child(5) { grid-column: 2 / 3; }
+      .label { margin-top: 7px; }
     }
+
     @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after { scroll-behavior: auto !important; }
+      * { scroll-behavior: auto !important; }
     }
   </style>
 </head>
 <body>
   <main>
-    <div class="eyebrow">a little place for remembering</div>
-    <h1>where is eugene?</h1>
-    <p class="subtitle">Some absences do not become smaller with time.<br>Some people remain part of every day.</p>
+    <div class="status">still missing</div>
 
-    <div class="rule" aria-hidden="true"></div>
-
-    <div class="elapsed-label">time since we lost contact</div>
-    <section class="calendar" aria-label="Elapsed calendar time">
-      <div class="unit"><span class="number" id="months">0</span><span class="unit-name">months</span></div>
-      <div class="unit"><span class="number" id="days">0</span><span class="unit-name">days</span></div>
+    <section class="timer" aria-label="Time elapsed">
+      <div class="unit">
+        <span class="value" id="months">0</span>
+        <span class="label">months</span>
+      </div>
+      <div class="unit">
+        <span class="value" id="days">0</span>
+        <span class="label">days</span>
+      </div>
+      <div class="unit">
+        <span class="value" id="hours">00</span>
+        <span class="label">hours</span>
+      </div>
+      <div class="unit">
+        <span class="value" id="minutes">00</span>
+        <span class="label">minutes</span>
+      </div>
+      <div class="unit">
+        <span class="value" id="seconds">00</span>
+        <span class="label">seconds</span>
+      </div>
     </section>
 
-    <section class="clock" aria-label="Additional elapsed time">
-      <div class="clock-item"><span class="clock-value" id="hours">00</span><span class="clock-label">hours</span></div>
-      <div class="clock-item"><span class="clock-value" id="minutes">00</span><span class="clock-label">minutes</span></div>
-      <div class="clock-item"><span class="clock-value" id="seconds">00</span><span class="clock-label">seconds</span></div>
-      <div class="clock-item"><span class="clock-value" id="total-days">0</span><span class="clock-label">total days</span></div>
-    </section>
+    <div class="total">
+      <span class="total-value" id="total-days">0</span>
+      <span>total days</span>
+    </div>
 
-    <div class="since">since 21 May 2026 · 17:48</div>
-
-    <p class="message">“Still missing you. Still remembering.”</p>
-    <footer>for eugene · always remembered</footer>
+    <footer>where is Eugene?</footer>
   </main>
 
   <script>
-    // Recorded moment: 21 May 2026, 17:48.
-    // This is interpreted in the visitor's local timezone.
+    // 21 May 2026, 17:48 — interpreted in the visitor's local timezone.
     const absenceBegan = new Date(2026, 4, 21, 17, 48, 0);
+    const dayLength = 24 * 60 * 60 * 1000;
 
     const elements = {
       months: document.getElementById("months"),
@@ -192,7 +173,7 @@
 
     const pad = value => String(value).padStart(2, "0");
 
-    function calendarDifference(start, end) {
+    function getCalendarElapsed(start, end) {
       let cursor = new Date(start);
       let months = 0;
 
@@ -204,27 +185,31 @@
         months += 1;
       }
 
-      const days = Math.floor((end - cursor) / 86400000);
+      const days = Math.floor((end - cursor) / dayLength);
       cursor.setDate(cursor.getDate() + days);
-      const remainder = Math.max(0, end - cursor);
-      return { months, days, remainder };
+
+      return {
+        months,
+        days,
+        remainder: Math.max(0, end - cursor)
+      };
     }
 
-    function update() {
+    function updateTimer() {
       const now = new Date();
       const elapsed = Math.max(0, now - absenceBegan);
-      const { months, days, remainder } = calendarDifference(absenceBegan, now);
+      const { months, days, remainder } = getCalendarElapsed(absenceBegan, now);
 
       elements.months.textContent = months;
       elements.days.textContent = days;
       elements.hours.textContent = pad(Math.floor(remainder / 3600000));
       elements.minutes.textContent = pad(Math.floor((remainder % 3600000) / 60000));
       elements.seconds.textContent = pad(Math.floor((remainder % 60000) / 1000));
-      elements.totalDays.textContent = Math.floor(elapsed / 86400000).toLocaleString();
+      elements.totalDays.textContent = Math.floor(elapsed / dayLength).toLocaleString();
     }
 
-    update();
-    setInterval(update, 1000);
+    updateTimer();
+    setInterval(updateTimer, 1000);
   </script>
 </body>
 </html>

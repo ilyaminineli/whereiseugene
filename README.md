@@ -1,6 +1,6 @@
 # where is eugene?
 
-A small, quiet page for remembering Eugene.
+A small page for remembering Eugene.
 
 The live timer starts at **21 May 2026, 17:48** and displays the elapsed calendar months and days, the remaining hours/minutes/seconds, and total elapsed days.
 

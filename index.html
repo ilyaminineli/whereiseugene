@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -15,8 +16,14 @@
       --rule: #292824;
     }
 
-    * { box-sizing: border-box; }
-    html, body { min-height: 100%; }
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      min-height: 100%;
+    }
 
     body {
       margin: 0;
@@ -111,19 +118,39 @@
     }
 
     @media (max-width: 520px) {
-      main { width: min(100% - 36px, 420px); }
-      .status { margin-bottom: 34px; }
-      .timer { gap: 26px 8px; }
-      .unit { flex-basis: 30%; }
-      .value { font-size: clamp(34px, 10vw, 48px); }
-      .label { margin-top: 7px; }
+      main {
+        width: min(100% - 36px, 420px);
+      }
+
+      .status {
+        margin-bottom: 34px;
+      }
+
+      .timer {
+        gap: 26px 8px;
+      }
+
+      .unit {
+        flex-basis: 30%;
+      }
+
+      .value {
+        font-size: clamp(34px, 10vw, 48px);
+      }
+
+      .label {
+        margin-top: 7px;
+      }
     }
 
     @media (prefers-reduced-motion: reduce) {
-      * { scroll-behavior: auto !important; }
+      * {
+        scroll-behavior: auto !important;
+      }
     }
   </style>
 </head>
+
 <body>
   <main>
     <div class="status">still missing</div>
@@ -214,4 +241,5 @@
     setInterval(updateTimer, 1000);
   </script>
 </body>
+
 </html>
